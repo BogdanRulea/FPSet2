@@ -50,9 +50,45 @@ namespace FPSet1
             throw new NotImplementedException();
         }
 
-        private static int pb16()
+        private static string pb16()
         {
-            throw new NotImplementedException();
+            int n;
+            int x;
+            int ok = 0;
+            int noSecvente = 1;
+            int ult = 0;
+            int primul = 0;
+            Console.WriteLine("Scrie numarul de numere: ");
+            n = int.Parse(Console.ReadLine());
+            for (int i = 0; i < n; i++)
+            {
+                Console.WriteLine("Scrie numarul {0} din secventa", i);
+                x = int.Parse(Console.ReadLine());
+                if (i > 0 && ult <= x && (ok == 0 || ok == 1)) // verificam daca secventa este crescatoare
+                {
+                    ok = 1; // secventa crescatoare
+                }
+                else if (i > 0 && ult >= x && (ok == -1 || ok == 0)) // verificam daca secventa este descrescatoare
+                {
+                    ok = -1;
+                }
+                else if (i > 0)
+                {
+                    noSecvente++;
+                    ok = -ok;
+                }
+                if (i == 0)
+                {
+                    primul = x;
+                }
+                ult = x;
+            }
+
+            if (noSecvente > 3 || (noSecvente == 3 && ((ok == -1 && primul>ult) || (ok == 1 && primul < ult))))
+            {
+                return "Secventa nu este o secventa bitonica rotita";
+            }
+            return "Secventa este o secventa bitonica rotita";
         }
 
         private static string pb15()
